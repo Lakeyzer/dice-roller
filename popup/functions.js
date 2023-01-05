@@ -9,6 +9,7 @@ export const inputRoll = (e) => {
  * @returns {object} { input: string; total: number; }
  */
 export const rollString = (input) => {
+  console.log(input)
   const rolls = input.match(/(\d*d\d+)|(\d+)|(\+|-)/g);
   let outcome = "";
   const operate = (op, val, total) => (op === "+") ? total+val : total-val;

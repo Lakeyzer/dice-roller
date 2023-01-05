@@ -9,6 +9,29 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+button {
+  all: unset;
+}
+
+button {
+  background-color: var(--neutral-2);
+  color: var(--white);
+  padding: .75rem;
+	border-radius: 25px;
+	box-sizing: border-box;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	min-width: 43px;
+	min-height: 43px;
+}
+
+#quick-rolls {
+  margin-bottom: .5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
 ul#rolls {
   margin: 0;
   padding: 0;
