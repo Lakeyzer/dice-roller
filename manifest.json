@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+	"author": "Key Roos",
+  "name": "Dice Roller",
+  "description": "Rolls",
+  "version": "0.1",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+			"32":"assets/images/icon.png"
+		}
+  },
+	"permissions": [
+    "storage",
+		"activeTab",
+		"scripting",
+		"tabs"
+  ]
+}

@@ -1,0 +1,80 @@
+@import './variables.css';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+  margin: 0;
+  padding: .5rem;
+  min-width: 365px;
+  color: var(--neutral-1);
+  font-family: 'Open Sans', sans-serif;
+}
+
+ul#rolls {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 300px;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: .5rem;
+  gap: .5rem;
+}
+ul#rolls .roll .roll__input {
+  color: var(--neutral-4);
+}
+ul#rolls .roll .roll__result {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--overlay);
+  align-items: center;
+}
+ul#rolls .roll .roll__result-outcome {
+  padding: .5rem;
+  font-weight: bold;
+}
+ul#rolls .roll .roll__result-outcome .die {
+  border-radius: .2rem;
+  background-color: var(--neutral-2);
+  color: var(--neutral-5);
+  padding: 0 .2rem;
+  min-width: 10px;
+  text-align: center;
+  line-height: 18px;
+}
+ul#rolls .roll .roll__result-outcome .die.success {
+  background-color: var(--success);
+}
+ul#rolls .roll .roll__result-outcome .die.fail {
+  background-color: var(--fail);
+}
+ul#rolls .roll .roll__result-total {
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: max-content;
+  padding: .5rem;
+}
+
+
+
+.input {
+	width: auto;
+	display: flex;
+	background-color: var(--overlay);
+	border-radius: .2rem;
+	height: 2.5rem;
+	cursor: text;
+}
+.input__icon {
+	padding-left: .75rem;
+}
+.input__icon i {
+	line-height: 2.5rem;
+}
+.input input {
+	all: unset;
+	padding: 0 .5rem;
+	line-height: 2.5rem;
+	flex: 1;
+}

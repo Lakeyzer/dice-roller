@@ -1,0 +1,16 @@
+:root {
+  --success: #34a307;
+  --fail: #da362e;
+  --overlay: #d8d8d873;
+
+  --neutral-1: #131313;
+  --neutral-2: #505050;
+  --neutral-3: #646464;
+  --neutral-4: #949494;
+  --neutral-5: #dfdfdf;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+
+  }
+}
