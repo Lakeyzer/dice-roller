@@ -1,14 +1,22 @@
 <html>
 	<head>
 		<link href="css/styles.css" rel="stylesheet">
+    <script src="./libs/mathjs.min.js"></script>
+		<script src="./libs/random-js.min.js"></script>
+		<script src="./libs/dice-roller.min.js"></script>
 	</head>
   <body>
     <div id="content">
       <div id="quick-rolls"></div>
       <ul id="rolls"></ul>
-      <label for="roll-string" class="input">
-        <input type="text" id="roll-string" placeholder="Enter your roll (2d6+2) and press enter" />
-      </label>
+      <div id="roll-footer">
+        <label for="roll-string" class="input">
+          <input type="text" id="roll-string" placeholder="Enter your roll (2d6+2) and press enter" />
+        </label>
+        <button class="quick-roll hidden" id="quick-roll-button">
+          Roll selected dice
+        </button>
+      </div>
     </div>
     
 		<script src="popup/popup.js" type="module"></script>

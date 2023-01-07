@@ -3,10 +3,16 @@
 
 body {
   margin: 0;
-  padding: .5rem;
   min-width: 365px;
-  color: var(--neutral-1);
+  min-height: 400px;
+  color: var(--font-color);
+  background-color: var(--background);
   font-family: 'Open Sans', sans-serif;
+}
+
+#content {
+  grid-template-rows: auto 1fr auto;
+	height: 100%;
 }
 
 button {
@@ -14,7 +20,7 @@ button {
 }
 
 button {
-  background-color: var(--neutral-2);
+  background-color: var(--primary);
   color: var(--white);
   padding: .75rem;
 	border-radius: 25px;
@@ -22,42 +28,65 @@ button {
 	text-align: center;
 	font-weight: bold;
 	cursor: pointer;
+  position: relative;
 	min-width: 43px;
 	min-height: 43px;
+  box-shadow: var(--shadow); 
+	-webkit-box-shadow: var(--shadow); 
+	-moz-box-shadow: var(--shadow); 
+}
+
+button .count {
+	position: absolute;
+	right: -.1rem;
+	bottom: -.1rem;
+	font-size: .7rem;
+	background-color: var(--neutral-2);
+	color: var(--neutral-5);
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	font-weight: normal;
+	text-align: center;
+	line-height: 15px;
 }
 
 #quick-rolls {
-  margin-bottom: .5rem;
+  padding: .5rem;
   display: flex;
   justify-content: space-between;
 }
 
 ul#rolls {
   margin: 0;
-  padding: 0;
   list-style: none;
-  height: 300px;
-  min-height: 0;
+  height: calc(100vh - 123px);
   overflow: auto;
   display: flex;
   flex-direction: column-reverse;
-  margin-bottom: .5rem;
+  padding: .5rem;
   gap: .5rem;
 }
-ul#rolls .roll .roll__input {
-  color: var(--neutral-4);
+ul#rolls .roll .roll__notation {
+  color: var(--neutral-2);
+  font-weight: bold;
+  font-style: italic;
 }
 ul#rolls .roll .roll__result {
   display: flex;
   justify-content: space-between;
-  background-color: var(--overlay);
+  background-color: var(--neutral-6);
   align-items: center;
+	border-radius: .3rem;
+  box-shadow: var(--shadow); 
+	-webkit-box-shadow: var(--shadow); 
+	-moz-box-shadow: var(--shadow);
 }
-ul#rolls .roll .roll__result-outcome {
+ul#rolls .roll .roll__result-output {
   padding: .5rem;
   font-weight: bold;
 }
-ul#rolls .roll .roll__result-outcome .die {
+ul#rolls .roll .roll__result-output .die {
   border-radius: .2rem;
   background-color: var(--neutral-2);
   color: var(--neutral-5);
@@ -66,12 +95,6 @@ ul#rolls .roll .roll__result-outcome .die {
   text-align: center;
   line-height: 18px;
 }
-ul#rolls .roll .roll__result-outcome .die.success {
-  background-color: var(--success);
-}
-ul#rolls .roll .roll__result-outcome .die.fail {
-  background-color: var(--fail);
-}
 ul#rolls .roll .roll__result-total {
   font-weight: bold;
   font-size: 1.2rem;
@@ -79,12 +102,23 @@ ul#rolls .roll .roll__result-total {
   padding: .5rem;
 }
 
-
+#roll-footer {
+  position: relative;
+  padding: 0 .5rem .5rem .5rem;
+}
+#roll-footer .quick-roll {
+	position: absolute;
+	top: 0;
+	left: .5rem;
+	width: calc(100% - 1rem);
+  border-radius: .2rem;
+	height: 2.5rem;
+}
 
 .input {
 	width: auto;
 	display: flex;
-	background-color: var(--overlay);
+	background-color: var(--neutral-4);
 	border-radius: .2rem;
 	height: 2.5rem;
 	cursor: text;
@@ -100,4 +134,8 @@ ul#rolls .roll .roll__result-total {
 	padding: 0 .5rem;
 	line-height: 2.5rem;
 	flex: 1;
+}
+
+.hidden {
+  display: none;
 }
