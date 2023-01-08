@@ -1,13 +1,16 @@
 @import './variables.css';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import "./font-awesome/fontawesome.min.css";
+@import "./font-awesome/solid.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
 
 body {
   margin: 0;
   min-width: 365px;
   min-height: 400px;
+  font-size: 15px;
   color: var(--font-color);
   background-color: var(--background);
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 #content {
@@ -22,7 +25,6 @@ button {
 button {
   background-color: var(--primary);
   color: var(--white);
-  padding: .75rem;
 	border-radius: 25px;
 	box-sizing: border-box;
 	text-align: center;
@@ -60,31 +62,64 @@ button .count {
 ul#rolls {
   margin: 0;
   list-style: none;
-  height: calc(100vh - 123px);
+  height: calc(100vh - 131px);
   overflow: auto;
   display: flex;
   flex-direction: column-reverse;
   padding: .5rem;
   gap: .5rem;
 }
+ul#rolls .roll {
+  position: relative;
+}
+ul#rolls .roll .info {
+  background-color: var(--neutral-6);
+	border-radius: .3rem;
+  box-shadow: var(--shadow); 
+	-webkit-box-shadow: var(--shadow); 
+	-moz-box-shadow: var(--shadow);
+  padding: 1px .5rem;
+  line-height: 20px;
+}
+ul#rolls .roll .info .command {
+  background-color: var(--neutral-5);
+  border-radius: .2rem;
+  padding: 0 .2rem;
+  cursor: pointer;
+}
 ul#rolls .roll .roll__notation {
-  color: var(--neutral-2);
-  font-weight: bold;
-  font-style: italic;
+  color: var(--neutral-3);
+  line-height: 25px;
+  margin-bottom: 5px;
+}
+ul#rolls .roll .roll__actions {
+  display: none;
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
+}
+ul#rolls .roll:hover .roll__actions {
+  display: block;
+}
+ul#rolls .roll .roll__actions button {
+  min-width: 20px;
+  min-height: 20px;
+  margin-left: .2rem;
+  font-size: .7rem;
 }
 ul#rolls .roll .roll__result {
   display: flex;
   justify-content: space-between;
   background-color: var(--neutral-6);
-  align-items: center;
+  align-items: flex-end;
 	border-radius: .3rem;
   box-shadow: var(--shadow); 
 	-webkit-box-shadow: var(--shadow); 
 	-moz-box-shadow: var(--shadow);
+  border-left: solid 5px var(--primary);
 }
 ul#rolls .roll .roll__result-output {
   padding: .5rem;
-  font-weight: bold;
 }
 ul#rolls .roll .roll__result-output .die {
   border-radius: .2rem;
@@ -104,7 +139,7 @@ ul#rolls .roll .roll__result-total {
 
 #roll-footer {
   position: relative;
-  padding: 0 .5rem .5rem .5rem;
+  padding: .5rem;
 }
 #roll-footer .quick-roll {
 	position: absolute;
@@ -122,6 +157,7 @@ ul#rolls .roll .roll__result-total {
 	border-radius: .2rem;
 	height: 2.5rem;
 	cursor: text;
+  font-size: .9rem;
 }
 .input__icon {
 	padding-left: .75rem;
@@ -136,6 +172,20 @@ ul#rolls .roll .roll__result-total {
 	flex: 1;
 }
 
+::placeholder {
+  color: var(--neutral-3);
+  opacity: .7;
+}
+::-webkit-input-placeholder {
+  color: var(--neutral-3);
+  opacity: .7;
+}
+:-ms-input-placeholder {
+  color: var(--neutral-3);
+  opacity: .7;
+}
+
+.neutral-3 { color: var(--neutral-3) !important; }
 .hidden {
   display: none;
 }

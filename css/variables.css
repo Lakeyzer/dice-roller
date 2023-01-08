@@ -9,7 +9,7 @@
 
   --neutral-1: #1a2327;
   --neutral-2: #455A64;
-  --neutral-3: #D3E3FD;
+  --neutral-3: #96a4b9;
   --neutral-4: #E2ECFC;
   --neutral-5: #F2F6FC;
   --neutral-6: #FFF;
@@ -18,14 +18,14 @@
   :root {
     color-scheme: dark;
 
-    --background: #0a0e0f;
+    --background: #141c1f;
     --font-color: #F2F6FC;
 
     --neutral-1: #394b53;
     --neutral-2: #F2F6FC;
-    --neutral-3: #607d8a;
+    --neutral-3: #6b8c9b;
     --neutral-4: #2d393f;
     --neutral-5: #455A64;
-    --neutral-6: #1a2327;
+    --neutral-6: #27353a;
     }
 }
