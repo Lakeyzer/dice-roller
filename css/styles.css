@@ -78,7 +78,7 @@ ul#rolls .roll .info {
   box-shadow: var(--shadow); 
 	-webkit-box-shadow: var(--shadow); 
 	-moz-box-shadow: var(--shadow);
-  padding: 1px .5rem;
+  padding: .5rem;
   line-height: 20px;
 }
 ul#rolls .roll .info .command {

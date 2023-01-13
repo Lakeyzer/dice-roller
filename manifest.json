@@ -1,13 +1,22 @@
 {
   "manifest_version": 3,
 	"author": "Key Roos",
-  "name": "Dice Roller",
+  "name": "Poly Dice Roller",
   "description": "Rolls",
   "version": "0.1",
+  "icons": {
+    "16":"assets/images/icon16.png",
+    "32":"assets/images/icon32.png",
+    "48":"assets/images/icon48.png",
+    "128":"assets/images/icon128.png"
+  },
   "action": {
     "default_popup": "index.html",
     "default_icon": {
-			"32":"assets/images/icon.png"
+			"16":"assets/images/icon16.png",
+			"32":"assets/images/icon32.png",
+			"48":"assets/images/icon48.png",
+			"128":"assets/images/icon128.png"
 		}
   },
 	"permissions": [

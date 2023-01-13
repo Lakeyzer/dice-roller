@@ -160,9 +160,9 @@ function runCommand(command) {
 		info.innerHTML = '<div class="info"><p><b>Commands</b><br/>'+
 			'<span class="command" data-command="/advanced">/advanced</span> More info on dice rolling<br/>'+
 			'<span class="command" data-command="/clear">/clear</span> Clear roll history<br/>'+
-			'<span class="command" data-command="/macro adv==Advantage:2d20kh1">/macro [macro name]==[macro]</span> Create a new macro<br/>'+
-			'<span class="command" data-command="/ls">/macro-ls</span> List all your macros<br/>'+
-			'<span class="command" data-command="/macro-d">/macro-d [macro name]</span> Delete macro</p>'+
+			'<span class="command" data-command="/m adv==Advantage:2d20kh1">/m [macro name]==[macro]</span> Create a new macro<br/>'+
+			'<span class="command" data-command="/ml">/ml</span> List all your macros<br/>'+
+			'<span class="command" data-command="/md">/md [macro name]</span> Delete a macro</p>'+
 			'<p><b>Macros</b><br/>'+
 			'Macros can be used to save notations and quickly execute them.<br/>'+
 			'<span class="command" data-command="#">#[macro name]</span> Roll your macro</p>'+
@@ -181,16 +181,17 @@ function runCommand(command) {
 			'</div>';
 		list.prepend(info);
 	}
-	if(command.match(/^\/macro/g) || command.match(/^\/ls/g)) {
+	if(command.match(/^\/m/g) || command.match(/^\/ml/g)) {
 		// Fetch macros
 		chrome.storage.session.get(["macros"], (result) => {
 			const current = result.macros || {};
 
-			if(command.match(/^\/ls/g)) {
+			if(command.match(/^\/ml/g)) {
 				const li = document.createElement("li");
 				li.setAttribute("class", "roll");
 				const macros = document.createElement("div");
 				macros.setAttribute("class", "info");
+				macros.innerHTML = "<div>Your macros</div>"
 
 				for(const [key, value] of Object.entries(current)) {
 					macros.innerHTML += `<span class="command" data-command="#${key}">#${key}</span> <span class="neutral-3">${value}</span><br/>`;
@@ -199,7 +200,7 @@ function runCommand(command) {
 				list.prepend(li);
 				createCommandEvents();
 			} else {
-				let macro = command.replace(/^\/macro /g, "");
+				let macro = command.replace(/^\/m /g, "");
 				macro = macro.split("==");
 				const key = macro[0].trim();
 				const value = macro[1].trim();
@@ -208,7 +209,7 @@ function runCommand(command) {
 					const feedback = document.createElement("li");
 					feedback.setAttribute("class", "roll");
 					feedback.innerHTML = '<div class="info">Macro created<br/>'+
-						`<span class="command" data-command="#${key}">#${key}</span> ${value}`+
+						`<span class="command" data-command="#${key}">${key}</span> ${value}`+
 						'</div>';
 					list.prepend(feedback);
 				});
