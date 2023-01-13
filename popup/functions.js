@@ -123,6 +123,7 @@ export function addRoll(roll) {
 }
 
 export function executeInput(input) {
+		const list = document.getElementById("rolls");
 		try {
 				if(input.match(/^\//g)) {
 						runCommand(input);
@@ -143,6 +144,10 @@ export function executeInput(input) {
 				document.getElementById("roll-string").value = "";
 		} catch(e) {
 				console.error(e);
+				const feedback = document.createElement("li");
+				feedback.setAttribute("class", "roll");
+				feedback.innerHTML = `<div class="info error">${e}</div>`;
+				list.prepend(feedback);
 		} finally {
 			saveHistory(input);
 		}
@@ -160,7 +165,6 @@ function runCommand(command) {
 		info.setAttribute("class", "roll");
 		
 		info.innerHTML = '<div class="info"><p><b>Commands</b><br/>'+
-			'<span class="command" data-command="/advanced">/advanced</span> More info on dice rolling<br/>'+
 			'<span class="command" data-command="/clear">/clear</span> Clear roll history<br/>'+
 			'<span class="command" data-command="/m adv==Advantage:2d20kh1">/m [macro name]==[macro]</span> Create a new macro<br/>'+
 			'<span class="command" data-command="/ml">/ml</span> List all your macros<br/>'+
@@ -180,10 +184,11 @@ function runCommand(command) {
 			'<p><b>Labels</b><br/>'+
 			'You can label your rolls with a title.<br/>'+
 			'<span class="command" data-command="Advantage:2d20kh1">Advantage:2d20kh1</span></p>'+
+			'<a href="https://dice-roller.github.io/documentation/guide/#features" target="_blank" rel="noopener">Check here for advanced roll options</a>'+
 			'</div>';
 		list.prepend(info);
 	}
-	if(command.match(/^\/m/g) || command.match(/^\/ml/g)) {
+	if(command.match(/^\/m/g)) {
 		// Fetch macros
 		chrome.storage.session.get(["macros"], (result) => {
 			const current = result.macros || {};
@@ -201,6 +206,8 @@ function runCommand(command) {
 				li.appendChild(macros);
 				list.prepend(li);
 				createCommandEvents();
+			} else if(command.match(/^\/md/g)) {
+				deleteMacro(command);
 			} else {
 				let macro = command.replace(/^\/m /g, "");
 				macro = macro.split("==");
@@ -210,7 +217,7 @@ function runCommand(command) {
 				chrome.storage.session.set({ macros: current }, () => {
 					const feedback = document.createElement("li");
 					feedback.setAttribute("class", "roll");
-					feedback.innerHTML = '<div class="info">Macro created<br/>'+
+					feedback.innerHTML = '<div class="info"><span class="success">Macro created</span><br/>'+
 						`<span class="command" data-command="#${key}">${key}</span> ${value}`+
 						'</div>';
 					list.prepend(feedback);
@@ -228,6 +235,21 @@ function rollMacro(macro) {
 		if(result?.macros?.[macro]) {
 			executeInput(result.macros[macro]);
 		}
+	});
+}
+
+function deleteMacro(macro) {
+	const list = document.getElementById("rolls");
+	macro = macro.replace(/^\/md /g, "");
+	chrome.storage.session.get(["macros"], (result) => {
+		const current = result?.macros;
+		delete current[macro];
+		chrome.storage.session.set({ macros: current }, () => {
+			const feedback = document.createElement("li");
+				feedback.setAttribute("class", "roll");
+				feedback.innerHTML = `<div class="info error">Macro ${macro} deleted<br/></div>`;
+				list.prepend(feedback);
+		});
 	});
 }
 

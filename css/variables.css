@@ -1,7 +1,7 @@
 :root {
   --primary: #4285F4;
   --success: #0F9D58;
-  --fail: #DB4437;
+  --error: #DB4437;
   --white: #fff;
   --background: #F2F6FC;
   --font-color: #212121;
