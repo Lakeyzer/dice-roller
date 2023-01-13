@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-	"author": "Key Roos",
+	"author": "Key Roos & Harm Manders",
   "name": "Poly Dice Roller",
-  "description": "Rolls",
+  "description": "Advanced Dice Roller suitable for any RPG.",
   "version": "0.1",
   "icons": {
     "16":"assets/images/icon16.png",
@@ -20,9 +20,6 @@
 		}
   },
 	"permissions": [
-    "storage",
-		"activeTab",
-		"scripting",
-		"tabs"
+    "storage"
   ]
 }
