@@ -38,7 +38,24 @@ button {
 	-moz-box-shadow: var(--shadow); 
 }
 
-button .count {
+button.roll-button {
+  padding: 0;
+	font-size: 1.4rem;
+	position: relative;
+}
+button.roll-button.d100 {
+	font-size: 1rem;
+}
+button.roll-button.d100 i:first-child {
+	vertical-align: super;
+	margin-right: -1px;
+}
+button.roll-button.d100 i:nth-child(2) {
+	vertical-align: sub;
+	margin-left: -1px;
+}
+
+button.roll-button .count {
 	position: absolute;
 	right: -.1rem;
 	bottom: -.1rem;
@@ -88,7 +105,7 @@ ul#rolls .roll .info .command {
   cursor: pointer;
 }
 ul#rolls .roll .roll__notation {
-  color: var(--neutral-3);
+  color: var(--font-color);
   line-height: 25px;
   margin-bottom: 5px;
 }
@@ -119,6 +136,7 @@ ul#rolls .roll .roll__result {
   border-left: solid 5px var(--primary);
 }
 ul#rolls .roll .roll__result-output {
+  color: var(--neutral-3);
   padding: .5rem;
 }
 ul#rolls .roll .roll__result-output .die {

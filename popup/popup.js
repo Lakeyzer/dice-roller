@@ -1,8 +1,12 @@
-import { inputRoll, quickRoll, setQuickRoll, addRoll } from "./functions.js";
+import { executeInput, quickRoll, setQuickRoll, addRoll, getHistory } from "./functions.js";
 
 const input = document.getElementById("roll-string");
 input.focus();
-input.addEventListener("keypress", (e) => { if(e.key === "Enter") { inputRoll(e.target.value) }});
+input.addEventListener("keydown", (e) => { 
+  if(e.key === "Enter") { executeInput(e.target.value) }
+  if(e.key === "ArrowUp") { getHistory(1); }
+  if(e.key === "ArrowDown") { getHistory(-1); }
+});
 
 chrome.storage.session.get(["rolls"], (result) => {
   const rolls = result.rolls || [];
@@ -23,7 +27,13 @@ for(const d of [20, 4, 6, 8, 10, 100, 12]) {
   die.setAttribute("data-die", d);
   die.addEventListener("click", (e) => setQuickRoll(e, "+"));
   die.addEventListener("contextmenu", (e) => setQuickRoll(e, "-"));
-  die.innerText = `d${d}`;
+  
+  if(d === 100) {
+    die.innerHTML = `<i class="fas fa-dice-d10" aria-hidden="true"></i>`+
+        `<i class="fas fa-dice-d10" aria-hidden="true"></i>`;
+  } else {
+      die.innerHTML = `<i class="fas fa-dice-d${d}" aria-hidden="true"></i>`;
+  }
 
   quick_rolls.appendChild(die);
 };

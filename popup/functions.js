@@ -4,7 +4,7 @@ export function quickRoll(e) {
 	for(const [die, count] of Object.entries(quickRolls)) {
 			rolls.push(`${count}d${die}`);
 	}
-	inputRoll(rolls.join("+"));
+	executeInput(rolls.join("+"));
 	quickRolls = {};
 	e.currentTarget.classList.add("hidden");
 	const dice = document.querySelectorAll("#quick-rolls button");
@@ -105,7 +105,7 @@ export function addRoll(roll) {
 	actions.setAttribute("class", "roll__actions");
 	const reroll = document.createElement("button");
 	reroll.setAttribute("class", "actions__reroll");
-	reroll.addEventListener("click", () => inputRoll(roll.title));
+	reroll.addEventListener("click", () => executeInput(roll.title));
 	reroll.innerHTML = '<i class="fas fa-sync-alt" aria-hidden="true"></i>';
 	const edit = document.createElement("button");
 	edit.setAttribute("class", "actions__edit");
@@ -122,7 +122,7 @@ export function addRoll(roll) {
 	list.prepend(li);
 }
 
-export function inputRoll(input) {
+export function executeInput(input) {
 		try {
 				if(input.match(/^\//g)) {
 						runCommand(input);
@@ -143,6 +143,8 @@ export function inputRoll(input) {
 				document.getElementById("roll-string").value = "";
 		} catch(e) {
 				console.error(e);
+		} finally {
+			saveHistory(input);
 		}
 };
 
@@ -212,6 +214,7 @@ function runCommand(command) {
 						`<span class="command" data-command="#${key}">${key}</span> ${value}`+
 						'</div>';
 					list.prepend(feedback);
+					createCommandEvents();
 				});
 			}
 		});
@@ -223,7 +226,7 @@ function rollMacro(macro) {
 	macro = macro.replace(/^#/g, "");
 	chrome.storage.session.get(["macros"], (result) => {
 		if(result?.macros?.[macro]) {
-			inputRoll(result.macros[macro]);
+			executeInput(result.macros[macro]);
 		}
 	});
 }
@@ -234,4 +237,38 @@ function createCommandEvents() {
 	for(const cmd of commands) {
 		cmd.addEventListener("click", (e) => { input.value = e.target.getAttribute("data-command"), input.focus() });
 	}
+}
+
+function saveHistory(input) {
+	const max = 20;
+	chrome.storage.session.get(["history"], (result) => {
+		const current = result.history || [];
+		current.unshift(input);
+		if(current.length > max) {
+			current.pop();
+		}
+		chrome.storage.session.set({ history: current });
+	});
+}
+
+let index = -1;
+export function getHistory(diff) {
+	const input = document.getElementById("roll-string");
+	index += diff;
+	chrome.storage.session.get(["history"], (result) => {
+		const current = result.history || [];
+		if(index < -1) {
+			index = current.length-1;
+		} 
+		if(index > current.length-1) {
+			index = -1;
+		}
+		if (index == -1) {
+			input.value = ""
+		} else {
+			const value = current[index];
+			input.value = value;
+		}
+	});
+	console.log(diff, index)
 }
